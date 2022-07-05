@@ -2,11 +2,13 @@ package com.example.jsonexample
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.jsonexample.model.User
 import com.example.jsonexample.model.UserModelClass
+import com.google.gson.Gson
 import org.json.JSONException
-import org.json.JSONObject
 import java.io.IOException
 import java.nio.charset.Charset
+
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,6 +19,13 @@ class MainActivity : AppCompatActivity() {
         val usersList: ArrayList<UserModelClass> = ArrayList()
 
         try {
+
+            val jsonString = getJSONFromAssets()!!
+
+            val users = Gson().fromJson(jsonString, User::class.java)
+
+
+            /*
             // As we have JSON object, so we are getting the object
             //Here we are calling a Method which is returning the JSON object
             val obj = JSONObject(getJSONFromAssets()!!)
@@ -48,11 +57,14 @@ class MainActivity : AppCompatActivity() {
 
                 // add the details in the list
                 usersList.add(userDetails)
-            }
+            }*/
+
         } catch (e: JSONException) {
             // exception
             e.printStackTrace()
         }
+
+        //TODO : Here should print the content of the arraylist
     }
 
     /**
